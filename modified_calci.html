@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+
+            .header{
+                    font-family: sans-serif;
+                    font-size: medium;
+                    color: white;
+            }
+            table{
+                  border-collapse: separate;
+                  border-spacing: 50px 10px;
+                  position: absolute;
+                  top: 35%;
+                  left: 20%;       
+            }
+            .main{
+                  background-color: blue;
+            }
+            body{
+                  background-color: blue;
+            }
+            .result{
+                    border: 1px solid;
+                    width: 45%; 
+                    height: 7%;
+                    position: absolute; 
+                    top: 25%; 
+                    left: 24%;
+                    background-color: white;
+                    border-radius: 3px;
+            }
+    </style>
+</head>
+<body>
+      <div class="header">
+           <h1 style="position: relative; top: 5%; left: 15%;">Calculator</h1>
+      </div>
+
+     
+      <div class="result">
+            <p id="x" style="color: black;"></p>
+      </div>
+ 
+      <table>      
+           <tr>
+                  <td><input id="btn1" type="submit"  value="Rad" onclick="rad()" style="width: 40px; height: 40px; color: green;"></td>
+                  <td><input id="btn2" type="submit" value="Deg" onclick="deg()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="x!" onclick="facto()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="(" onclick="left_paranthesis()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value=")" onclick="right_paranthesis()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="%" onclick="remainder()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="AC" onclick="clear_exp()" style="width: 40px; height: 40px;"></td>
+            </tr>
+            <tr>
+                  <td><input type="submit" value="Inv" onclick="inv()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="Sin" onclick="_sin()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="ln" onclick="_ln()" style="width: 40px; height: 40px;"></td>
+                  <td><button type="submit"  onclick="seven()" style="width: 40px; height: 40px;">7</button></td>
+                  <td><input type="submit" value="8" onclick="eight()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="9" onclick="nine()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="÷" onclick="divide()" style="width: 40px; height: 40px;"></td>
+            </tr>
+            <tr>
+                  <td><input type="submit" value="π" onclick="_pi()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="Cos"  onclick="_cos()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="log" onclick="_log()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="4" onclick="four()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="5" onclick="five()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="6" onclick="six()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="X" onclick="multiply()" style="width: 40px; height: 40px;"></td>
+            </tr>
+            <tr>
+                  <td><input type="submit" value="e" onclick="e()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="tan" onclick="_tan()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="√" onclick="_sqrt()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="1" onclick="one()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="2" onclick="two()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="3" onclick="three()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="-" onclick="subtract()" style="width: 40px; height: 40px;"></td>
+            </tr>
+            <tr>
+                  <td><input type="submit" value="Ans" onclick="recent_answer()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="EXP" onclick="exp()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="x^y" onclick="power()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="0" onclick="zero()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="." onclick="dot()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="=" onclick="result()" style="width: 40px; height: 40px;"></td>
+                  <td><input type="submit" value="+" onclick="add()" style="width: 40px; height: 40px;"></td>
+            </tr>
+      </table>
+      <script>
+        let mode;
+      function clear_exp(){
+      answer=document.getElementById("x").innerHTML;
+      document.getElementById("x").innerHTML="";
+      }
+      function rad(){
+      mode="radians";
+      document.getElementById("btn1").style.color="green";
+      document.getElementById("btn2").style.color="black";
+      }
+      function deg(){
+      mode="degrees";
+      document.getElementById("btn1").style.color="black";
+      document.getElementById("btn2").style.color="green";
+      }
+      function zero(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"0";
+      }
+      function one(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"1";
+      }
+      function two(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"2";
+      }
+      function three(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"3";
+      }
+      function four(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"4";
+      }
+      function five(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"5";
+      }
+      function six(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"6";
+      }    
+      function seven(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"7";
+      }
+      function eight(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"8";
+      }
+      function nine(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"9";
+      }
+      function add(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"+";
+      }
+      function subtract(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"-";
+      }
+      function multiply(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"*";
+      }
+      function divide(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"/";
+      }
+      function left_paranthesis(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"(";
+      }
+      function right_paranthesis(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+")";
+      }
+      function dot(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+".";
+      }
+      function remainder(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"%";
+      }
+      function power(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"^";
+      }
+      function recent_answer(){
+      document.getElementById("x").innerHTML=answer;
+      }
+      function exp(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"E";
+      }
+      function _sqrt(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"sqrt(";
+      }
+      function _tan(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"tan(";
+      }
+      function e(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"2.71";
+      }
+      function _pi(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"3.14";
+      }
+      function _log(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"log(";
+      }
+      function _cos(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"cos(";
+      }
+      function _ln(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"ln(";
+      }
+      function _sin(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"sin(";
+      }
+      function facto(){
+      document.getElementById("x").innerHTML="("+document.getElementById("x").innerHTML+")"+"!";
+      }
+      function inv(){
+      document.getElementById("x").innerHTML=document.getElementById("x").innerHTML+"inv(";
+      }
+     
+function evaluateInfixExpression(expression) {
+
+  expression = expression.replace(/\s/g, '');
+
+ 
+  var postfix = infixToPostfix(expression);
+
+
+  var result = evaluatePostfixExpression(postfix);
+
+  return result;
+}
+
+
+function infixToPostfix(expression) {
+  var operators = [];
+  var postfix = [];
+  var precedence = {
+    '+': 1,
+    '-': 1,
+    '*': 2,
+    '/': 2,
+    '^': 3,
+    'sin': 4,
+    'cos': 4,
+    'tan': 4,
+    'sqrt': 4,
+    'log': 4,
+    'ln': 4,
+    '!': 5,
+    'inv': 5,
+  };
+
+  var tokens = expression.split(/([-+*/^()])/);
+
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i];
+     console.log(token)
+    
+    if (!isNaN(parseFloat(token))) {
+      postfix.push(token);
+    }
+   
+    else if (token in precedence) {
+      while (
+        operators.length > 0 &&
+        precedence[token] <= precedence[operators[operators.length - 1]]
+      ) {
+        postfix.push(operators.pop());
+      }
+      operators.push(token);
+    }
+   
+    else if (token === '(') {
+      operators.push(token);
+    }
+
+ else if (token === ')') {
+      while (operators.length > 0 && operators[operators.length - 1] !== '(') {
+        postfix.push(operators.pop());
+      }
+      operators.pop(); 
+    }
+  }
+
+ 
+  while (operators.length > 0) {
+    postfix.push(operators.pop());
+  }
+
+  return postfix.join(' ');
+}
+
+
+
+
+
+function evaluatePostfixExpression(expression) {
+  var stack = [];
+
+  var tokens = expression.split(' ');
+
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i];
+
+    if (!isNaN(parseFloat(token))) {
+      stack.push(parseFloat(token));
+    } else if (token === '+') {
+      var operand2 = stack.pop();
+      var operand1 = stack.pop();
+      stack.push(operand1 + operand2);
+    } else if (token === '-') {
+      var operand2 = stack.pop();
+      var operand1 = stack.pop();
+      stack.push(operand1 - operand2);
+    } else if (token === '*') {
+      var operand2 = stack.pop();
+      var operand1 = stack.pop();
+      stack.push(operand1 * operand2);
+    } else if (token === '/') {
+      var operand2 = stack.pop();
+      var operand1 = stack.pop();
+      stack.push(operand1 / operand2);
+    } else if (token === '^') {
+      var operand2 = stack.pop();
+      var operand1 = stack.pop();
+      stack.push(Math.pow(operand1, operand2));
+    } else if (token === 'sin') {
+      var operand = stack.pop();
+      if(mode==="degrees"){
+        let radians = operand * (Math.PI/180);
+        stack.push(Math.sin(radians));
+      }
+      else{
+        stack.push(Math.sin(operand));
+      }
+    } else if (token === 'cos') {
+      var operand = stack.pop();
+      if(mode==="degrees"){
+        let radians = operand * (Math.PI/180);
+        stack.push(Math.cos(radians));
+      }
+      else{
+        stack.push(Math.cos(operand));
+      }
+    } else if (token === 'tan') {
+      var operand = stack.pop();
+      if(mode==="degrees"){
+        let radians = operand * (Math.PI/180);
+        stack.push(Math.tan(radians));
+      }
+      else{
+        stack.push(Math.tan(operand));
+      }
+    } else if (token === 'sqrt') {
+      var operand = stack.pop();
+      stack.push(Math.sqrt(operand));
+    }
+    else if (token === 'log') {
+      var operand = stack.pop();
+      stack.push(Math.log10(operand));
+    }
+    else if (token === 'ln') {
+      var operand = stack.pop();
+      stack.push(Math.log(operand));
+    }
+    else if (token === '!') {
+      var operand = stack.pop();
+      console.log(operand)
+      stack.push(factorial(operand));
+    }
+    else if (token === 'inv') {
+      var operand = stack.pop();
+      stack.push(1 / operand);
+    }
+  }
+
+  return stack.pop();
+}
+
+  function factorial(n) {
+    let product=1;
+    
+   for(let k=n;k>1;k=k-1){
+       product=product*k;
+       console.log(k)
+   }
+   return product;
+  }
+
+  function result(){
+    var expression = document.getElementById("x").innerHTML;
+    document.getElementById("x").innerHTML = evaluateInfixExpression(expression);
+  }
+
+      </script>
+</body>
+</html>
